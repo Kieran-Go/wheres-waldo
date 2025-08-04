@@ -1,0 +1,30 @@
+.header{
+    position: fixed;
+    top: 0;                     
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: beige;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.title{
+    font-family: 'Waldo';
+    text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    color: blue;
+}
+.title span{
+    color: red;
+}
+
+.waldo-logo {
+    max-width: 80px;
+}
+
+.title:hover, .waldo-logo:hover {
+    cursor: pointer;
+}
