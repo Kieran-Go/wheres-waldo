@@ -22,14 +22,14 @@
   box-shadow: 0 0 12px 4px #4a90e2;
 }
 
-a {
-  text-decoration: none;
-}
-
 .scene-link {
   display: inline-block;
   width: fit-content;
   max-width: 100%;
+  text-decoration: none;
+}
+.scene-link:hover{
+  text-decoration: none;
 }
 
 .scene-img {
@@ -44,13 +44,12 @@ a {
   padding: 0.5rem 1rem;
 }
 
-.scene-info h3 {
+.scene-name {
   font-family: 'Waldo';
   color: rgb(19, 148, 181);
   text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0;
   font-size: 1.1rem;
-  text-decoration: none;
 }
 
 .scene-card:hover .scene-info h3 {
@@ -89,9 +88,11 @@ a {
 .footer-content a {
   color: #ac0000;
   margin-top: -40px;
+  text-decoration: none;
 }
 .footer-content a:hover {
   color: #ff0000;
+  text-decoration: none;
 }
 
 .footer button {

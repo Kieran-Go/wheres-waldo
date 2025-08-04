@@ -26,7 +26,7 @@ export default function Home() {
               <div className="scene-card">
                 <img src={scene.imageUrl} alt={`Thumbnail for ${scene.name}`} className="scene-img"/>
                 <div className="scene-info">
-                  <h3>{scene.name}</h3>
+                  <h3 className="scene-name">{scene.name}</h3>
                   <div className="characters-container">
                     {scene.characters.map((character) => {
                       return(
