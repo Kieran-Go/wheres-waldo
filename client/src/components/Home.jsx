@@ -15,6 +15,7 @@ export default function Home() {
 
   return (
     <>
+    {/* Render the Home Header */}
       <HomeHeader />
 
       {/* Render all scenes */}
@@ -40,6 +41,20 @@ export default function Home() {
             </Link>
           )
         })}
+      </div>
+
+      {/* Render the footer */}
+      <div className="footer">
+        <div className="footer-content">
+          <h1>Are you a Waldo expert?</h1>
+          <Link to='/leaderboard'>
+            <h1>View the leaderboard</h1>
+          </Link>
+        </div>
+
+        <Link to='/leaderboard'>
+          <button>View Leaderboard</button>
+        </Link>
       </div>
     </>
   )
