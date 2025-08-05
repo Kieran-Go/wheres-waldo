@@ -42,13 +42,13 @@
   gap: 1rem;
   overflow-x: auto;
   padding: 1rem 0;
-  margin-bottom: 2rem;
+  margin-bottom: -20px;
   scrollbar-width: thin;
   scrollbar-color: #999 #e0e0e0;
 }
 
 .leaderboard__scene-card {
-  min-width: 200px;
+  min-width: 100px;
   border: 2px solid #ccc;
   border-radius: 10px;
   padding: 0.5rem;
@@ -90,7 +90,7 @@
   padding: 1rem;
   border: 2px solid #ccc;
   border-radius: 12px;
-  background-color: #fcfcfc;
+  background-color: beige;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 

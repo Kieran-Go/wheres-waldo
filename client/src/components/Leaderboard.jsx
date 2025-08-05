@@ -53,7 +53,7 @@ export default function Leaderboard() {
                             key={scene.id}
                             className={`leaderboard__scene-card ${activeScene?.id === scene.id ? 'active' : ''}`}
                             // On click, set the active scene to this and store it in local storage
-                            onClick={() => {setActiveScene(scene); localStorage.setItem('sceneData', JSON.stringify(scene))}}
+                            onClick={() => {setActiveScene(scene); localStorage.setItem('sceneData', JSON.stringify(scene));}}
                         >
                             <img src={scene.imageUrl} alt={scene.name} />
                             <p>{scene.name}</p>
