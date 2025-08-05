@@ -15,6 +15,7 @@ const db = [
                 yMin: 0,
                 yMax: 0,
             },
+            
         ]
     },
     {

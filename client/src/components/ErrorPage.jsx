@@ -16,11 +16,11 @@ export default function ErrorPage() {
         <HomeHeader />
         
         <div className="error-page">
-        <h1>Oops!</h1>
-        <p>Sorry, an unexpected error has occurred.</p>
-        <p className="error-message">
-            <i>{error.statusText || error.message}</i>
-        </p>
+          <h1>Oops!</h1>
+          <p>Sorry, an unexpected error has occurred.</p>
+          <p className="error-message">
+              <i>{error.statusText || error.message}</i>
+          </p>
         <Link to="/">Back to Home</Link>
         </div>
     </>

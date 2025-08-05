@@ -19,19 +19,19 @@ export default function Home() {
       <HomeHeader />
 
       {/* Render all scenes */}
-      <div className="scenes-container">
+      <div className="home__scenes-container">
         {scenes.map((scene) => {
           return (
-            <Link className="scene-link" to={`/scene/${scene.id}`} key={scene.id}>
-              <div className="scene-card">
-                <img src={scene.imageUrl} alt={`Thumbnail for ${scene.name}`} className="scene-img"/>
-                <div className="scene-info">
-                  <h3 className="scene-name">{scene.name}</h3>
-                  <div className="characters-container">
+            <Link className="home__scene-link" to={`/scene/${scene.id}`} key={scene.id}>
+              <div className="home__scene-card">
+                <img src={scene.imageUrl} alt={`Thumbnail for ${scene.name}`} className="home__scene-img"/>
+                <div className="home__scene-info">
+                  <h3 className="home__scene-name">{scene.name}</h3>
+                  <div className="home__characters-container">
                     {scene.characters.map((character) => {
                       return(
-                        <div className="characters-container">
-                          <img key={character.id} className="character-img" src={character.imageUrl} alt={character.name}/>
+                        <div className="home__character">
+                          <img key={character.id} src={character.imageUrl} alt={character.name}/>
                         </div>
                       )
                     })}
@@ -44,8 +44,8 @@ export default function Home() {
       </div>
 
       {/* Render the footer */}
-      <div className="footer">
-        <div className="footer-content">
+      <div className="home__footer">
+        <div className="home__footer-content">
           <h1>Are you a Waldo expert?</h1>
           <Link to='/leaderboard'>
             <h1>View the leaderboard</h1>

@@ -1,4 +1,4 @@
-.scenes-container {
+.home__scenes-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
@@ -7,7 +7,7 @@
   margin-top: 120px;
 }
 
-.scene-card {
+.home__scene-card {
   border: 1px solid #ccc;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
   will-change: background-color, box-shadow, color;
@@ -16,58 +16,59 @@
   max-width: 400px;
   border-radius: 20px;
 }
-.scene-card:hover {
+.home__scene-card:hover {
   cursor: pointer;
   background-color: #2f90ff;
   box-shadow: 0 0 12px 4px #4a90e2;
 }
 
-.scene-link {
+.home__scene-link {
   display: inline-block;
   width: fit-content;
   max-width: 100%;
   text-decoration: none;
 }
-.scene-link:hover{
+.home__scene-link:hover{
   text-decoration: none;
 }
 
-.scene-img {
+.home__scene-img {
   width: 100%;
   border-bottom: 1px solid #ccc;
 }
 
-.scene-info {
+.home__scene-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
 }
 
-.scene-name {
+.home__scene-name {
   font-family: 'Waldo';
-  color: rgb(19, 148, 181);
+  color: rgb(74, 140, 255);
   text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.2);
   margin: 0;
   font-size: 1.1rem;
+  font-style: italic;
 }
 
-.scene-card:hover .scene-info h3 {
+.home__scene-card:hover .home__scene-info h3 {
   color: white;
   transition: color 0.3s ease;
 }
 
-.characters-container {
+.home__characters-container {
   display: flex;
   gap: 0.5rem;
 }
 
-.character-img {
+.home__character img {
   max-width: 30px;
   height: auto;
 }
 
-.footer {
+.home__footer {
   font-family: 'Waldo';
   background-color: beige;
   display: flex;
@@ -80,22 +81,22 @@
   text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.footer-content {
+.home__footer-content {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-.footer-content a {
+.home__footer-content a {
   color: #ac0000;
   margin-top: -40px;
   text-decoration: none;
 }
-.footer-content a:hover {
+.home__footer-content a:hover {
   color: #ff0000;
   text-decoration: none;
 }
 
-.footer button {
+.home__footer button {
   padding: 0.75rem 1.5rem;
   font-size: 1.5rem;
   cursor: pointer;
@@ -105,6 +106,6 @@
   border-radius: 5px;
   transition: background-color 0.2s ease;
 }
-.footer button:hover {
+.home__footer button:hover {
   background-color: #ff0000;
 }
