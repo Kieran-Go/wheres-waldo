@@ -1,18 +1,29 @@
+import Layout from "./components/Layout";
 import Home from "./components/Home";
 import Scene from "./components/Scene";
+import Leaderboard from "./components/Leaderboard";
 import ErrorPage from "./components/ErrorPage";
 
 const routes = [
-    {
-        path: '/',
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
         element: <Home />,
-        errorElement: <ErrorPage />,
-    },
-
-    {
-        path: '/scene/:id',
+      },
+      {
+        path: 'scene/:id',
         element: <Scene />,
-        errorElement: <ErrorPage />
-    },
-]
+      },
+      {
+        path: 'leaderboard',
+        element: <Leaderboard />,
+      },
+    ],
+  },
+];
+
 export default routes;

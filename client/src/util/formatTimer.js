@@ -1,0 +1,7 @@
+// Converts seconds to MM:SS format
+const formatTimer = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+export default formatTimer;

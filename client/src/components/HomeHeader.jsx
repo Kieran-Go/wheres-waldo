@@ -6,7 +6,7 @@ export default function HomeHeader() {
     return(
         <>
             <div className='home__header'>
-                <Link to=''>
+                <Link to='/'>
                     <img src={waldoLogo} alt="Waldo logo" />
                     <h1>Where's <span>Waldo?</span></h1>
                 </Link>

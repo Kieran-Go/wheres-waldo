@@ -2,6 +2,7 @@ import '../css/Scene.css';
 import db from '../mockData';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import formatTimer from '../util/formatTimer';
 
 export default function Scene() {
     // Get scene data from db
@@ -54,13 +55,6 @@ export default function Scene() {
             yMin: character.yMin,
             yMax: character.yMax,
         }));
-    }
-
-    // Converts seconds to MM:SS format
-    const formatTimer = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
 
     // Handle when scene image is clicked
