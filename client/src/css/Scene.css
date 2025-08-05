@@ -32,6 +32,10 @@
   text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
+.found {
+    opacity: 0.25;
+}
+
 .scene__character-img {
   width: 30px;
   object-fit: cover;
@@ -66,4 +70,28 @@
     width: 99%;
     margin: 0 auto 10px;
     margin-top: 90px;
+}
+
+.scene__character-menu {
+    position: absolute;
+    background-color: beige;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 0.5rem;
+    font-family: 'Waldo', sans-serif;
+}
+
+.scene__character-menu div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    border-radius: 20px;
+    border: 1px solid black;
+    padding: 0.5em;
+    background-color: rgb(255, 255, 187);
+}
+
+.scene__character-menu div:hover {
+    background-color: rgb(104, 210, 255);
 }
