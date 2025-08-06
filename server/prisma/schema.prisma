@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Scene {
+  id         Int              @id @default(autoincrement())
+  name       String
+  imageUrl   String           @map("image_url")
+  scores     Score[]
+  characters SceneCharacter[]
+
+  @@map("scenes")
+}
+
+model Character {
+  id       Int              @id @default(autoincrement())
+  name     String
+  imageUrl String           @map("image_url")
+  scenes   SceneCharacter[]
+
+  @@map("characters")
+}
+
+model SceneCharacter {
+  scene       Scene     @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  sceneId     Int
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  characterId Int
+
+  xMin Int @map("x_min")
+  xMax Int @map("x_max")
+  yMin Int @map("y_min")
+  yMax Int @map("y_max")
+
+  @@id([sceneId, characterId])
+  @@map("scene_character")
+}
+
+model Score {
+  id      Int    @id @default(autoincrement())
+  name    String
+  time    Int
+  scene   Scene  @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  sceneId Int
+
+  @@map("scores")
+}
