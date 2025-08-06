@@ -49,6 +49,7 @@
 
 .leaderboard__scene-card {
   min-width: 100px;
+  max-width: 300px;
   border: 2px solid #ccc;
   border-radius: 10px;
   padding: 0.5rem;
