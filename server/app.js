@@ -16,6 +16,8 @@ app.use(express.json());
 
 // Routes
 app.use('/scenes', routes.scenes);
+app.use('/characters', routes.characters);
+app.use('/scores', routes.scores);
 
 // Error handling middleware
 app.use(errorMiddleware);

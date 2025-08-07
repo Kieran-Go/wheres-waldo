@@ -6,8 +6,37 @@ const router = Router();
 
 // GET routes
 router.get('/', async (req, res) => {
-    const scenes = await controller.getAllScenes();
-    res.send(scenes);
+    try{
+        const scenes = await controller.getAllScenes();
+        res.json(scenes);
+    }
+    catch(err){
+        throw err;
+    }
 })
+
+//POST routes
+router.post('/', async (req, res) => {
+    try{
+        const { name, imageUrl, } = req.body;
+        const newScene = await controller.createScene(name, imageUrl);
+        res.json(newScene);
+    }
+    catch(err){
+        throw err;
+    }
+});
+
+router.post('/scene-character/:id', async (req, res) => {
+    try{
+        const sceneId = parseInt(req.params.id, 10);
+        const { characterId, xMin, xMax, yMin, yMax } = req.body;
+        const newSceneCharacter = await controller.createSceneCharacter(sceneId, characterId, xMin, xMax, yMin, yMax);
+        res.json(newSceneCharacter);
+    }
+    catch(err){
+        throw err;
+    }
+});
 
 export default router;
