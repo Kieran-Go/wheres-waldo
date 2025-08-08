@@ -1,13 +1,15 @@
 import HomeHeader from "./HomeHeader";
-import db from "../mockData";
 import "../css/Leaderboard.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import formatTimer from "../util/formatTimer";
+import { DataContext } from "./App";
+import Loading from "./Loading";
 
 export default function Leaderboard() {
-    // Get scene data from db
-    const scenes = db;
+    // Get scenes data from context
+    const { scenes } = useContext(DataContext);
+    if (!scenes) return <Loading message="Loading scene data..."/>
 
     const [activeScene, setActiveScene] = useState(null);
 
@@ -77,8 +79,7 @@ export default function Leaderboard() {
                             ))}
                         </>
                     ) : (
-                        // Replace with a Loading component later
-                        <p>Loading...</p> 
+                        <Loading message="Loading score data..." showHeader={false}/> 
                     )}
                 </div>
             </div>

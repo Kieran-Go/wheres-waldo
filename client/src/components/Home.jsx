@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import '../css/Home.css';
 import HomeHeader from "./HomeHeader";
-import db from "../mockData";
+import { DataContext } from "./App";
+import Loading from "./Loading";
 
 export default function Home() {
   // Change document title
@@ -10,9 +11,10 @@ export default function Home() {
     document.title = "Where's Waldo?";
   }, []);
 
-  // Retrieve scene data from the db
-  const scenes = db;
-
+  // Get scenes data from context
+  const { scenes } = useContext(DataContext);
+  if (!scenes) return <Loading message="Loading scene data..." />
+    
   return (
     <>
     {/* Render the Home Header */}

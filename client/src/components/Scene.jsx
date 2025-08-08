@@ -1,12 +1,19 @@
 import '../css/Scene.css';
-import db from '../mockData';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import formatTimer from '../util/formatTimer';
+import { DataContext } from './App';
 
 export default function Scene() {
-    // Get scene data from db
-    const scene = db[0]; // Mock data for now
+    // Get scenes data from context
+    const { scenes } = useContext(DataContext);
+    if (!scenes) return <Loading message="Loading scene data..."/>
+
+    // Get specific scene data using params
+    const { id } = useParams();
+    const scene = scenes?.find((s) => s.id.toString() === id);
+    if (!scene) return <Loading message="Loading scene data..."/>
 
     // States
     const [gameInProgress, setGameInProgress] = useState(true);

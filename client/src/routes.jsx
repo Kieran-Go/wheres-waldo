@@ -1,4 +1,4 @@
-import Layout from "./components/Layout";
+import App from "./components/App";
 import Home from "./components/Home";
 import Scene from "./components/Scene";
 import Leaderboard from "./components/Leaderboard";
@@ -7,7 +7,7 @@ import ErrorPage from "./components/ErrorPage";
 const routes = [
   {
     path: '/',
-    element: <Layout />,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
