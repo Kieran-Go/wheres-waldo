@@ -15,10 +15,9 @@ router.get('/', async (req, res) => {
 });
 
 // POST routes
-router.post('/:id', async (req, res) => {
+router.post('/', async (req, res) => {
     try{
-        const sceneId = parseInt(req.params.id, 10);
-        const { name, time } = req.body;
+        const { name, time, sceneId } = req.body;
         const newScore = await controller.createScore(name, time, sceneId);
         res.json(newScore);
     }

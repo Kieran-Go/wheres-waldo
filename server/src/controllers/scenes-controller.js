@@ -6,7 +6,7 @@ module.exports = {
             const scenes = await prisma.scene.findMany({
             include: {
                 scores: {
-                select: { id: true, name: true, time: true }
+                    select: { id: true, name: true, time: true }
                 },
                 characters: {
                 include: {
@@ -27,7 +27,6 @@ module.exports = {
                 id: scene.id,
                 name: scene.name,
                 imageUrl: scene.imageUrl,
-                scores: scene.scores,
                 characters: scene.characters.map(entry => ({
                     id: entry.character.id,
                     name: entry.character.name,
@@ -44,6 +43,17 @@ module.exports = {
         }
     },
 
+    getSceneScores: async (sceneId) => {
+        try{
+            return await prisma.score.findMany({
+                where: { sceneId: sceneId },
+                orderBy: { time: 'asc'},
+            });
+        }
+        catch(err){
+            throw err;
+        }
+    },
 
     createScene: async (name, imageUrl) => {
         try{

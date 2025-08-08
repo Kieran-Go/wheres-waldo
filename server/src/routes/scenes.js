@@ -13,7 +13,18 @@ router.get('/', async (req, res) => {
     catch(err){
         throw err;
     }
-})
+});
+
+router.get('/:id/scores', async (req, res) => {
+    try{
+        const sceneId = parseInt(req.params.id, 10);
+        const scenes = await controller.getSceneScores(sceneId);
+        res.json(scenes);
+    }
+    catch{
+        throw err;
+    }
+});
 
 //POST routes
 router.post('/', async (req, res) => {
