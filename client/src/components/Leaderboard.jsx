@@ -36,6 +36,7 @@ export default function Leaderboard() {
                 const data = await res.json();
                 setScores(data);
             } catch (err) {
+                alert("Failed to fetch scores");
                 setScores([]);
             }
         };

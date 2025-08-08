@@ -136,10 +136,9 @@ export default function Scene() {
         return true;
     }
 
-    // End game logic ---WIP---
+    // End game logic
     const endGame = () => {
         setGameInProgress(false);
-        console.log("You win!");
     }
 
     return(
