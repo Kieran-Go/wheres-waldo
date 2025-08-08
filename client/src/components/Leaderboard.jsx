@@ -10,7 +10,7 @@ export default function Leaderboard() {
     // Get scenes data from context
     const { scenes } = useContext(DataContext);
     const [activeScene, setActiveScene] = useState(null);
-    const [scores, setScores] = useState([]);
+    const [scores, setScores] = useState(null);
 
     const serverOrigin = import.meta.env.VITE_SERVER_ORIGIN;
 
