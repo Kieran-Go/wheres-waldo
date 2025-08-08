@@ -1,0 +1,53 @@
+/* Full-screen overlay */
+.scoreform__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form container */
+.scoreform__container {
+  background-color: beige;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  font-family: 'Waldo', sans-serif;
+  text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Time styles */
+.scoreform__container p span {
+    color: red;
+}
+
+/* Input + button styling */
+.scoreform__input {
+  padding: 0.5rem;
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.scoreform__button, a button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #ac0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.scoreform__button:hover, a button:hover{
+    cursor: pointer;
+    background-color: #ff0000;
+}

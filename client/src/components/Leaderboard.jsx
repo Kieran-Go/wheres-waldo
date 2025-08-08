@@ -9,26 +9,46 @@ import Loading from "./Loading";
 export default function Leaderboard() {
     // Get scenes data from context
     const { scenes } = useContext(DataContext);
-    if (!scenes) return <Loading message="Loading scene data..."/>
-
     const [activeScene, setActiveScene] = useState(null);
+    const [scores, setScores] = useState([]);
 
-    // Use once after mount
+    const serverOrigin = import.meta.env.VITE_SERVER_ORIGIN;
+
+    // On first mount: set document title and initialize active scene
     useEffect(() => {
-        // Change document title
         document.title = `Leaderboard - Where's Waldo?`;
 
-        // Initialize the active scene
-        const scene = getActiveScene();
-        setActiveScene(scene);
-    },[]);
+        const sceneId = getActiveSceneId();
+        const foundScene = scenes?.find(scene => scene.id === sceneId);
+        if (foundScene) {
+            setActiveScene(foundScene);
+        }
+    },[scenes]);
 
-    // Retrieves the active scene from local storage, or defaults to first scene
-    const getActiveScene = () => {
-        const storedScene = localStorage.getItem('sceneData');
-        if (storedScene) return JSON.parse(storedScene);
-        return scenes[0];
+    // Fetch scores when activeScene changes
+    useEffect(() => {
+        if (!activeScene) return;
+
+        const fetchScores = async () => {
+            try {
+                const res = await fetch(`${serverOrigin}/scenes/${activeScene.id}/scores`);
+                if (!res.ok) throw new Error("Failed to fetch scores.");
+                const data = await res.json();
+                setScores(data);
+            } catch (err) {
+                setScores([]);
+            }
+        };
+        fetchScores();
+    },[activeScene]);
+
+    // Retrieves the active scene ID from localStorage or defaults to first scene ID
+    const getActiveSceneId = () => {
+        const storedId = localStorage.getItem('activeSceneId');
+        return storedId ? parseInt(storedId, 10) : scenes[0]?.id;
     }
+
+    if (!scenes || !activeScene || !scores) return <Loading message="Loading leaderboard..." />;
 
     return(
         <>
@@ -55,7 +75,10 @@ export default function Leaderboard() {
                             key={scene.id}
                             className={`leaderboard__scene-card ${activeScene?.id === scene.id ? 'active' : ''}`}
                             // On click, set the active scene to this and store it in local storage
-                            onClick={() => {setActiveScene(scene); localStorage.setItem('sceneData', JSON.stringify(scene));}}
+                            onClick={() => {
+                                setActiveScene(scene);
+                                localStorage.setItem('activeSceneId', scene.id);
+                            }}
                         >
                             <img src={scene.imageUrl} alt={scene.name} />
                             <p>{scene.name}</p>
@@ -65,21 +88,19 @@ export default function Leaderboard() {
 
                 {/* Render the actual leaderboard */}
                 <div className="leaderboard">
-                    {activeScene ? (
-                        <>
-                            <div className="leaderboard__column-titles">
-                                <p>NAME</p>
-                                <p>TIME (MINUTES)</p>
-                            </div>
-                            {activeScene.scores.map((score) => (
-                                <div key={score.id}>
-                                    <p>{score.name}</p>
-                                    <p>{formatTimer(score.time)}</p>
-                                </div>
-                            ))}
-                        </>
+                    <div className="leaderboard__column-titles">
+                        <p>NAME</p>
+                        <p>TIME (MM:SS)</p>
+                    </div>
+                    {scores.length > 0 ? (
+                        scores.map((score, index) => (
+                        <div key={score.id}>
+                            <p>{`${index + 1}: ${score.name}`}</p>
+                            <p>{formatTimer(score.time)}</p>
+                        </div>
+                        ))
                     ) : (
-                        <Loading message="Loading score data..." showHeader={false}/> 
+                        <p>No scores yet...</p>
                     )}
                 </div>
             </div>

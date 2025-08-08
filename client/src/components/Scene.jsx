@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import formatTimer from '../util/formatTimer';
 import { DataContext } from './App';
+import ScoreForm from './ScoreForm';
 
 export default function Scene() {
     // Get scenes data from context
@@ -184,6 +185,9 @@ export default function Scene() {
                     ))}
                 </div>
             )}
+
+            {/* Render ScoreForm component when game ends */}
+            {!gameInProgress && <ScoreForm time={timer} sceneId={id}/>}
         </>
     );
 }
