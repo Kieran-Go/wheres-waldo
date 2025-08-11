@@ -1,45 +1,46 @@
 import { Router } from "express";
 import controller from "../controllers/scenes-controller.js";
+import verify from "../middleware/verify.js";
 
 // Initialize router
 const router = Router();
 
 // GET routes
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try{
         const scenes = await controller.getAllScenes();
         res.json(scenes);
     }
     catch(err){
-        throw err;
+        next(err);
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
     try {
         const id = parseInt(req.params.id, 10);
-        const scene = await controller.getScene(id);
+        const scene = await controller.getSceneById(id);
         res.json(scene);
     }
     catch(err){
-        throw err;
+        next(err);
     }
 });
 
 //POST routes
-router.post('/', async (req, res) => {
+router.post('/', verify, async (req, res, next) => {
     try{
         const { name, imageUrl, } = req.body;
         const newScene = await controller.createScene(name, imageUrl);
         res.json(newScene);
     }
     catch(err){
-        throw err;
+        next(err);
     }
 });
 
 // PUT routes
-router.put('/:id', async (req, res) => {
+router.put('/:id', verify, async (req, res, next) => {
     try{
         const id = parseInt(req.params.id, 10);
         const { name, imageUrl } = req.body;
@@ -47,31 +48,19 @@ router.put('/:id', async (req, res) => {
         res.json(editedScene);
     }
     catch(err) {
-        throw err;
+        next(err);
     }
 });
 
 // DELETE routes
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verify, async (req, res, next) => {
     try{
         const id = parseInt(req.params.id, 10);
         const deletedScene = await controller.deleteScene(id);
         res.json(deletedScene);
     }
     catch(err) {
-        throw err;
-    }
-});
-
-router.post('/scene-character/:id', async (req, res) => {
-    try{
-        const sceneId = parseInt(req.params.id, 10);
-        const { characterId, xMin, xMax, yMin, yMax } = req.body;
-        const newSceneCharacter = await controller.createSceneCharacter(sceneId, characterId, xMin, xMax, yMin, yMax);
-        res.json(newSceneCharacter);
-    }
-    catch(err){
-        throw err;
+        next(err);
     }
 });
 

@@ -2,56 +2,39 @@ const prisma = require('../../db/pool');
 
 module.exports = {
     getAllCharacters: async () => {
-        try{
-            return await prisma.character.findMany();
-        }
-        catch(err) {
-            throw err;
-        }
+        return await prisma.character.findMany();
     },
 
-    getCharacter: async (id) =>{
-        try{
-            return await prisma.character.findUnique({
-                where: { id: id }
-            });
+    getCharacterById: async (id) =>{
+        const character = await prisma.character.findUnique({
+            where: { id }
+        });
+
+        if (!character) {
+            const error = new Error(`Character with id ${id} not found`);
+            error.statusCode = 404;
+            throw error;
         }
-        catch(err){
-            throw err;
-        }
+
+        return character;
     },
 
     createCharacter: async (name, imageUrl) => {
-        try{
-            return await prisma.character.create({
-                data: { name: name, imageUrl: imageUrl }
-            }); 
-        }
-        catch(err) {
-            throw err;
-        }
+        return await prisma.character.create({
+            data: { name, imageUrl }
+        }); 
     },
 
     editCharacter: async (id, name, imageUrl) => {
-        try{
-            return await prisma.character.update({
-                where: { id: id },
-                data: { name: name, imageUrl: imageUrl }
-            });
-        }
-        catch(err) {
-            throw err;
-        }
+        return await prisma.character.update({
+            where: { id },
+            data: { name, imageUrl}
+        });
     },
 
     deleteCharacter: async (id) => {
-        try{
-            return await prisma.character.delete({
-                where: { id: id }
-            });
-        }
-        catch(err) {
-            throw err;
-        }
+        return await prisma.character.delete({
+            where: { id }
+        });
     },
 }
