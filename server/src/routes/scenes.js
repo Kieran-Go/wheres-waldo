@@ -15,13 +15,13 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id/scores', async (req, res) => {
-    try{
-        const sceneId = parseInt(req.params.id, 10);
-        const scenes = await controller.getSceneScores(sceneId);
-        res.json(scenes);
+router.get('/:id', async (req, res) => {
+    try {
+        const id = parseInt(req.params.id, 10);
+        const scene = await controller.getScene(id);
+        res.json(scene);
     }
-    catch{
+    catch(err){
         throw err;
     }
 });
@@ -34,6 +34,31 @@ router.post('/', async (req, res) => {
         res.json(newScene);
     }
     catch(err){
+        throw err;
+    }
+});
+
+// PUT routes
+router.put('/:id', async (req, res) => {
+    try{
+        const id = parseInt(req.params.id, 10);
+        const { name, imageUrl } = req.body;
+        const editedScene = await controller.editScene(id, name, imageUrl);
+        res.json(editedScene);
+    }
+    catch(err) {
+        throw err;
+    }
+});
+
+// DELETE routes
+router.delete('/:id', async (req, res) => {
+    try{
+        const id = parseInt(req.params.id, 10);
+        const deletedScene = await controller.deleteScene(id);
+        res.json(deletedScene);
+    }
+    catch(err) {
         throw err;
     }
 });

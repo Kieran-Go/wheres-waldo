@@ -1,11 +1,22 @@
 const prisma = require('../../db/pool');
 
 module.exports = {
-    getCharacters: async () => {
+    getAllCharacters: async () => {
         try{
             return await prisma.character.findMany();
         }
         catch(err) {
+            throw err;
+        }
+    },
+
+    getCharacter: async (id) =>{
+        try{
+            return await prisma.character.findUnique({
+                where: { id: id }
+            });
+        }
+        catch(err){
             throw err;
         }
     },
@@ -31,5 +42,16 @@ module.exports = {
         catch(err) {
             throw err;
         }
-    }
+    },
+
+    deleteCharacter: async (id) => {
+        try{
+            return await prisma.character.delete({
+                where: { id: id }
+            });
+        }
+        catch(err) {
+            throw err;
+        }
+    },
 }
