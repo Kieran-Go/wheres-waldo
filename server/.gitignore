@@ -1,3 +1,8 @@
 # Ignore environment variables
 .env
+
+# Ignore prisma 
 /generated/prisma
+
+#Ignore node_modules
+node_modules/
