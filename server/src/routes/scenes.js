@@ -1,6 +1,7 @@
 import { Router } from "express";
 import controller from "../controllers/scenes-controller.js";
 import verify from "../middleware/verify.js";
+import val from "../validation/scenes-validator.js";
 
 // Initialize router
 const router = Router();
@@ -16,7 +17,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', val.validateSceneId, async (req, res, next) => {
     try {
         const id = parseInt(req.params.id, 10);
         const scene = await controller.getSceneById(id);
@@ -28,7 +29,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 //POST routes
-router.post('/', verify, async (req, res, next) => {
+router.post('/', verify, val.validateCreateScene, async (req, res, next) => {
     try{
         const { name, imageUrl, } = req.body;
         const newScene = await controller.createScene(name, imageUrl);
@@ -40,7 +41,7 @@ router.post('/', verify, async (req, res, next) => {
 });
 
 // PUT routes
-router.put('/:id', verify, async (req, res, next) => {
+router.put('/:id', verify, val.validateEditScene, async (req, res, next) => {
     try{
         const id = parseInt(req.params.id, 10);
         const { name, imageUrl } = req.body;
@@ -53,7 +54,7 @@ router.put('/:id', verify, async (req, res, next) => {
 });
 
 // DELETE routes
-router.delete('/:id', verify, async (req, res, next) => {
+router.delete('/:id', verify, val.validateSceneId, async (req, res, next) => {
     try{
         const id = parseInt(req.params.id, 10);
         const deletedScene = await controller.deleteScene(id);

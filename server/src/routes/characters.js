@@ -1,6 +1,7 @@
 import { Router } from "express";
 import controller from "../controllers/characters-controller.js";
 import verify from "../middleware/verify.js";
+import val from "../validation/characters-validator.js";
 
 // Initialize router
 const router = Router();
@@ -16,7 +17,7 @@ router.get('/', async (req, res, next) => {
     }
 }); 
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', val.validateCharacterId, async (req, res, next) => {
     try{
         const id = parseInt(req.params.id, 10);
         const character = await controller.getCharacterById(id);
@@ -28,7 +29,7 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // POST routes
-router.post('/', verify, async (req, res, next) => {
+router.post('/', verify, val.validateCreateCharacter, async (req, res, next) => {
     try{
         const { name, imageUrl } = req.body;
         const newCharacter = await controller.createCharacter(name, imageUrl);
@@ -40,11 +41,11 @@ router.post('/', verify, async (req, res, next) => {
 });
 
 // PUT routes
-router.put('/:id', verify, async (req, res, next) => {
+router.put('/:id', verify, val.validateEditCharacter, async (req, res, next) => {
     try{
         const id = parseInt(req.params.id, 10);
         const { name, imageUrl } = req.body;
-        const editedCharacter = await controller.editCharacter(name, imageUrl);
+        const editedCharacter = await controller.editCharacter(id, name, imageUrl);
         res.json(editedCharacter);
     }
     catch(err) {
@@ -53,7 +54,7 @@ router.put('/:id', verify, async (req, res, next) => {
 });
 
 // DELETE ROUTES
-router.delete('/:id', verify, async (req, res, next) => {
+router.delete('/:id', verify, val.validateCharacterId, async (req, res, next) => {
     try{
         const id = parseInt(req.params.id, 10);
         const deletedCharacter = await controller.deleteCharacter(id);

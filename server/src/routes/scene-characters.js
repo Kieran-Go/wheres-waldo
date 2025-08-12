@@ -1,6 +1,7 @@
 import { Router } from "express";
 import controller from "../controllers/scene-characters-controller.js";
 import verify from "../middleware/verify.js";
+import val from "../validation/scene-characters-validator.js";
 
 // Initialize router
 const router = Router();
@@ -16,7 +17,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/scenes/:sceneId', async (req, res, next) => {
+router.get('/scenes/:sceneId', val.validateSceneId, async (req, res, next) => {
     try{
         const sceneId = parseInt(req.params.sceneId);
         const sceneCharacters = await controller.getSceneCharactersBySceneId(sceneId);
@@ -28,7 +29,7 @@ router.get('/scenes/:sceneId', async (req, res, next) => {
 });
 
 // POST routes
-router.post('/', verify, async (req, res, next) => {
+router.post('/', verify, val.validateSceneCharacter, async (req, res, next) => {
     try{
         const { sceneId, characterId, xMin, xMax, yMin, yMax } = req.body;
         const newSceneCharacter = await controller.createSceneCharacter(sceneId, characterId, xMin, xMax, yMin, yMax);
@@ -40,7 +41,7 @@ router.post('/', verify, async (req, res, next) => {
 });
 
 // PUT routes
-router.put('/', verify, async (req, res, next) => {
+router.put('/', verify, val.validateSceneCharacter, async (req, res, next) => {
     try{
         const { sceneId, characterId, xMin, xMax, yMin, yMax } = req.body;
         const editedSceneCharacter = await controller.editSceneCharacter(sceneId, characterId, xMin, xMax, yMin, yMax);
@@ -52,7 +53,7 @@ router.put('/', verify, async (req, res, next) => {
 });
 
 // DELETE routes
-router.delete('/', verify, async (req, res, next) => {
+router.delete('/', verify, val.validateSceneCharacterId, async (req, res, next) => {
     try{
         const { sceneId, characterId } = req.body;
         const deletedSceneCharacter = await controller.deleteSceneCharacter(sceneId, characterId);

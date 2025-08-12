@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import controller from "../controllers/scores-controller.js";
 import verify from "../middleware/verify.js";
+import val from "../validation/scores-validator.js";
 
 const router = Router();
 
@@ -15,18 +16,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:id', async (req, res, next) => {
-    try{
-        const id = parseInt(req.params.id, 10);
-        const score = await controller.getScoreById(id);
-        res.json(score);
-    }
-    catch(err) {
-        next(err);
-    }
-});
-
-router.get('/scenes/:id', async (req, res, next) => {
+router.get('/scenes/:id', val.validateScoreId, async (req, res, next) => {
     try{
         const sceneId = parseInt(req.params.id, 10);
         const sceneScores = await controller.getScoresBySceneId(sceneId);
@@ -37,8 +27,19 @@ router.get('/scenes/:id', async (req, res, next) => {
     }
 });
 
+router.get('/:id', val.validateScoreId, async (req, res, next) => {
+    try{
+        const id = parseInt(req.params.id, 10);
+        const score = await controller.getScoreById(id);
+        res.json(score);
+    }
+    catch(err) {
+        next(err);
+    }
+});
+
 // POST routes
-router.post('/', verify, async (req, res, next) => {
+router.post('/', val.validateCreateScore, async (req, res, next) => {
     try{
         const { name, time, sceneId } = req.body;
         const newScore = await controller.createScore(name, time, sceneId);
@@ -50,7 +51,7 @@ router.post('/', verify, async (req, res, next) => {
 });
 
 // PUT routes
-router.put('/:id', verify, async (req, res, next) => {
+router.put('/:id', verify, val.validateEditScore, async (req, res, next) => {
     try {
         const id = parseInt(req.params.id, 10);
         const { name, time } = req.body;
@@ -63,7 +64,7 @@ router.put('/:id', verify, async (req, res, next) => {
 });
 
 // DELETE routes
-router.delete('/:id', verify, async (req, res, next) => {
+router.delete('/:id', verify, val.validateScoreId, async (req, res, next) => {
     try {
         const id = parseInt(req.params.id, 10);
         const deletedScore = await controller.deleteScore(id);
@@ -74,7 +75,7 @@ router.delete('/:id', verify, async (req, res, next) => {
     }
 });
 
-router.delete('/scenes/:id', verify, async (req, res, next) => {
+router.delete('/scenes/:id', verify, val.validateScoreId, async (req, res, next) => {
     try {
         const sceneId = parseInt(req.params.id, 10);
         const deletedSceneScores = await controller.deleteSceneScores(sceneId);
