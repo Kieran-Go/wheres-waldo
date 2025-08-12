@@ -12,7 +12,7 @@ module.exports = {
 
         if (!character) {
             const error = new Error(`Character with id ${id} not found`);
-            error.statusCode = 404;
+            error.status = 404;
             throw error;
         }
 

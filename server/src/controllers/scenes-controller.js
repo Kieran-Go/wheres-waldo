@@ -61,7 +61,7 @@ module.exports = {
 
         if (!scene) {
             const error = new Error(`Scene with id ${id} not found`);
-            error.statusCode = 404;
+            error.status = 404;
             throw error;
         }
 

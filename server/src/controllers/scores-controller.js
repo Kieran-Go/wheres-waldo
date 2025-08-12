@@ -12,7 +12,7 @@ module.exports = {
 
         if (!score) {
             const error = new Error(`Score with id ${id} not found`);
-            error.statusCode = 404;
+            error.status = 404;
             throw error;
         }
 

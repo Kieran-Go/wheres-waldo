@@ -24,8 +24,9 @@ app.use('/scene-characters', routes.sceneCharacters);
 app.use(errorMiddleware);
 
 // Start server
-app.listen(process.env.PORT, () => 
-  console.log(`App listening on port ${process.env.PORT}`)
+const port = process.env.PORT || 3000;
+app.listen(port, () => 
+  console.log(`App listening on port ${port}`)
 );
 
 // Disconnect from DB on app closing
