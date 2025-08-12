@@ -147,13 +147,28 @@ export default function Scene() {
             <div className="scene__header" onClick={() => setShowCharacterMenu(false)}>
                 {/* Left column*/}
                 <div className="scene__characters-container">
-                    {characters && characters.map((character) => (
-                    <div className={character.found ?
-                             "scene__character-card found" : "scene__character-card"} key={character.id}>
-                        <img className="scene__character-img" src={character.imageUrl} alt={character.name} />
-                        <p>{character.name}</p>
-                    </div>
-                    ))}
+                    {characters &&
+                        characters
+                        .slice()
+                        .sort((a, b) => a.id - b.id)
+                        .map((character) => (
+                            <div
+                                className={
+                                    character.found
+                                    ? "scene__character-card found"
+                                    : "scene__character-card"
+                                }
+                                key={character.id}
+                                >
+                                <img
+                                    className="scene__character-img"
+                                    src={character.imageUrl}
+                                    alt={character.name}
+                                />
+                                <p>{character.name}</p>
+                            </div>
+                        ))
+                    }
                 </div>
 
                 {/* Center column*/}
@@ -175,13 +190,17 @@ export default function Scene() {
                     className="scene__character-menu"
                     style={{ top: clickCoords.y + 100, left: clickCoords.x, }}
                 >
-                    {characters && characters.map((character) => (
-                        character.found === false &&
-                        <div key={character.id} onClick={() => handleCharacterSelect(character)}>
-                            <img src={character.imageUrl} alt={character.name} width="30" />
-                            <span style={{ marginLeft: '8px' }}>{character.name}</span>
-                        </div>
-                    ))}
+                    {characters &&
+                        characters
+                        .filter((character) => character.found === false)
+                        .sort((a, b) => a.id - b.id)
+                        .map((character) => (
+                            <div key={character.id} onClick={() => handleCharacterSelect(character)}>
+                                <img src={character.imageUrl} alt={character.name} width="30" />
+                                <span style={{ marginLeft: '8px' }}>{character.name}</span>
+                            </div>
+                        ))
+                    }
                 </div>
             )}
 

@@ -31,7 +31,7 @@ export default function Leaderboard() {
 
         const fetchScores = async () => {
             try {
-                const res = await fetch(`${serverOrigin}/scenes/${activeScene.id}/scores`);
+                const res = await fetch(`${serverOrigin}/scores/scenes/${activeScene.id}`);
                 if (!res.ok) throw new Error("Failed to fetch scores.");
                 const data = await res.json();
                 setScores(data);

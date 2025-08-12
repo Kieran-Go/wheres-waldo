@@ -30,13 +30,15 @@ export default function Home() {
                 <div className="home__scene-info">
                   <h3 className="home__scene-name">{scene.name}</h3>
                   <div className="home__characters-container">
-                    {scene.characters.map((character) => {
-                      return(
-                        <div className="home__character">
-                          <img key={character.id} src={character.imageUrl} alt={character.name}/>
+                    {scene.characters
+                      .slice()
+                      // Order characters by id asc
+                      .sort((a, b) => a.id - b.id) 
+                      .map((character) => (
+                        <div className="home__character" key={character.id}>
+                          <img src={character.imageUrl} alt={character.name} />
                         </div>
-                      )
-                    })}
+                      ))}
                   </div>
                 </div>
               </div>

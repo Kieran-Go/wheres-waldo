@@ -28,6 +28,9 @@ export default function ScoreForm({ time, sceneId }) {
       });
 
       if (!res.ok) throw new Error("Failed to submit score");
+
+      // Go to leaderboard with the active scene set to this scene
+      localStorage.setItem('activeSceneId', sceneId);
       navigate("/leaderboard");
     } catch (err) {
       alert("An error occurred submitting your score.");
