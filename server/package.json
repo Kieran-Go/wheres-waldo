@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
+    "build": "npx prisma generate",
     "dev": "nodemon",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,9 +18,9 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "prisma": "^6.13.0"
   },
   "devDependencies": {
-    "prisma": "^6.13.0"
   }
 }
