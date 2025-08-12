@@ -96,3 +96,15 @@
 .scene__character-menu div:hover {
     background-color: rgb(104, 210, 255);
 }
+
+.scene__character-menu-closer {
+  display: block;
+  font-family: sans-serif;
+  color: white;
+  background-color: rgb(137, 136, 136) !important;
+  justify-content: center;
+  
+}
+.scene__character-menu-closer:hover {
+  background-color: rgb(86, 86, 86) !important;
+}

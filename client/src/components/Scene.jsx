@@ -190,6 +190,7 @@ export default function Scene() {
                     className="scene__character-menu"
                     style={{ top: clickCoords.y + 100, left: clickCoords.x, }}
                 >
+                    <div className='scene__character-menu-closer' onClick={() => setShowCharacterMenu(false)}>Close</div>
                     {characters &&
                         characters
                         .filter((character) => character.found === false)
