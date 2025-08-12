@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "build": "npx prisma generate",
+    "build": "npm install && npx prisma generate",
     "dev": "nodemon",
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
