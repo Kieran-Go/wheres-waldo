@@ -44,7 +44,7 @@ export default function ScoreForm({ time, sceneId }) {
         <p>Your time: <span>{formatTimer(time)}</span></p>
         <p>Enter a name to submit to the leaderboard:</p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} role="form">
           <input
             type="text"
             placeholder="Enter your name"

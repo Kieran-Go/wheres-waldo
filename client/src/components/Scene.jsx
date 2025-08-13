@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import formatTimer from '../util/formatTimer';
 import { DataContext } from './App';
 import ScoreForm from './ScoreForm';
+import Loading from './Loading';
 
 export default function Scene() {
     // Get scenes data from context
@@ -187,7 +188,7 @@ export default function Scene() {
             {/* Conditionally render character selection menu */}
             {showCharacterMenu && clickCoords && (
                 <div
-                    className="scene__character-menu"
+                    className="scene__character-menu" data-testid="character-menu"
                     style={{ top: clickCoords.y + 100, left: clickCoords.x, }}
                 >
                     <div className='scene__character-menu-closer' onClick={() => setShowCharacterMenu(false)}>Close</div>
@@ -196,7 +197,9 @@ export default function Scene() {
                         .filter((character) => character.found === false)
                         .sort((a, b) => a.id - b.id)
                         .map((character) => (
-                            <div key={character.id} onClick={() => handleCharacterSelect(character)}>
+                            <div key={character.id} 
+                            data-testid={`Character Selection ${character.name}`}
+                            onClick={() => handleCharacterSelect(character)}>
                                 <img src={character.imageUrl} alt={character.name} width="30" />
                                 <span style={{ marginLeft: '8px' }}>{character.name}</span>
                             </div>
