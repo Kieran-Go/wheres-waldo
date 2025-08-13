@@ -4,7 +4,7 @@ import { DataContext } from '../components/App';
 import Home from '../components/Home';
 import mockScenes from '../mockData';
 
-describe('Home', () => {
+describe('Home component', () => {
     it('renders a scene from context', () => {
         render(
             <DataContext.Provider value={{ scenes: mockScenes }}>

@@ -81,7 +81,7 @@ export default function Leaderboard() {
                                 localStorage.setItem('activeSceneId', scene.id);
                             }}
                         >
-                            <img src={scene.imageUrl} alt={scene.name} />
+                            <img src={scene.imageUrl} alt={`Thumbnail for ${scene.name}`} />
                             <p>{scene.name}</p>
                         </div>
                     ))}
