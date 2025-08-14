@@ -11,13 +11,17 @@ export default function Leaderboard() {
     const { scenes } = useContext(DataContext);
     const [activeScene, setActiveScene] = useState(null);
     const [scores, setScores] = useState(null);
+    const [scoresCache, setScoresCache] = useState(null);
 
     const serverOrigin = import.meta.env.VITE_SERVER_ORIGIN;
 
-    // On first mount: set document title and initialize active scene
+    // On first mount: set document title
     useEffect(() => {
         document.title = `Leaderboard - Where's Waldo?`;
+    },[]);
 
+    // Initialize active scene
+    useEffect(() => {
         const sceneId = getActiveSceneId();
         const foundScene = scenes?.find(scene => scene.id === sceneId);
         if (foundScene) {
@@ -25,15 +29,23 @@ export default function Leaderboard() {
         }
     },[scenes]);
 
-    // Fetch scores when activeScene changes
+    // Get the active scores when activeScene changes
     useEffect(() => {
         if (!activeScene) return;
 
+        // If scene's scores cached, use them
+        if (scoresCache?.[activeScene.id]) {
+            setScores(scoresCache[activeScene.id]);
+            return;
+        }
+
+        // If not, then fetch the scores
         const fetchScores = async () => {
             try {
                 const res = await fetch(`${serverOrigin}/scores/scenes/${activeScene.id}`);
                 if (!res.ok) throw new Error("Failed to fetch scores.");
                 const data = await res.json();
+                setScoresCache(prev => ({ ...prev, [activeScene.id]: data }));
                 setScores(data);
             } catch (err) {
                 alert("Failed to fetch scores");
@@ -41,7 +53,7 @@ export default function Leaderboard() {
             }
         };
         fetchScores();
-    },[activeScene]);
+    }, [activeScene]);
 
     // Retrieves the active scene ID from localStorage or defaults to first scene ID
     const getActiveSceneId = () => {
