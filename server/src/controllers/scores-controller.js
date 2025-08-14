@@ -21,7 +21,10 @@ module.exports = {
 
     getScoresBySceneId: async (sceneId) => {
         return await prisma.score.findMany({
-            where: { sceneId }
+            where: { sceneId },
+            orderBy: {
+                time: "asc"
+            }
         });
     },
 
