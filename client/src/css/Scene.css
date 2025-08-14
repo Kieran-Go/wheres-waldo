@@ -1,3 +1,5 @@
+/* Header styles */
+
 .scene__header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -59,19 +61,23 @@
   color: white;
   border-radius: 5px;
   transition: background-color 0.2s ease;
+  margin-top: 0px;
 }
-
 .scene__header button:hover {
   background-color: #ff0000;
 }
 
+/* Scene image styles */
 
 .scene__img {
     display: block;
-    width: 99%;
-    margin: 0 auto 10px;
-    margin-top: 90px;
+    max-width: 99%;
+    width: auto;
+    height: auto;
+    margin: 90px auto 10px;
 }
+
+/* Character menu styles */
 
 .scene__character-menu {
     position: absolute;
@@ -107,4 +113,29 @@
 }
 .scene__character-menu-closer:hover {
   background-color: rgb(86, 86, 86) !important;
+}
+
+/* Media queries */
+@media (max-width: 600px) {
+  .scene__character-card {
+    font-size: 0.75em;
+  }
+
+  .scene__character-img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: -10px;
+  }
+
+  .scene__time {
+    text-align: center;
+    text-shadow: -2px 2px 4px rgba(0, 0, 0, 0.25);
+    color: rgb(74, 140, 255);
+    font-size: 1rem;
+  }
+
+  .scene__header button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
 }

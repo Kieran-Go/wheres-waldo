@@ -34,3 +34,24 @@
 .home__header img {
     max-width: 80px;
 }
+
+/* Media queries */
+@media (max-width: 850px) {
+    .home__header h1 {
+        font-size: 1.5em;
+    }
+
+    .home__header img {
+        max-width: 60px;
+    }
+}
+
+@media (max-width: 500px) {
+    .home__header h1 {
+        font-size: 1.25em;
+    }
+
+    .home__header img {
+        max-width: 45px;
+    }
+}

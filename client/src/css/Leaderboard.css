@@ -1,9 +1,10 @@
 /* Main content container */
 .leaderboard__content {
   margin-top: 120px;
-  width: 95%;
+  max-width: 92%;
   margin: 120px auto;
   font-family: 'Waldo', sans-serif;
+  font-style: italic;
   padding: 1em;
   border: black solid 2px;
   border-radius: 20px;
@@ -14,6 +15,8 @@
 
 .leaderboard__content h1 {
   font-style: italic;
+  margin-bottom: 0;
+  color: rgb(74, 140, 255);
 }
 
 .leaderboard__buttons-container {
@@ -42,14 +45,17 @@
   display: flex;
   gap: 1rem;
   overflow-x: auto;
-  padding: 1rem 0;
+  padding: 1rem;
+  margin-top: 20px;
   margin-bottom: -20px;
-  scrollbar-width: thin;
+  scrollbar-width:auto;
   scrollbar-color: #999 #e0e0e0;
+  border: black solid 1px;
+  border-radius: 12px;
 }
 
 .leaderboard__scene-card {
-  min-width: 100px;
+  min-width: 200px;
   max-width: 300px;
   border: 2px solid #ccc;
   border-radius: 10px;
@@ -60,6 +66,7 @@
   text-align: center;
   will-change: background-color, box-shadow, color;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: rgb(74, 140, 255);
 }
 
 .leaderboard__scene-card img {
@@ -81,8 +88,10 @@
 }
 
 .leaderboard__scene-card.active {
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+  border-color: #00f7ff;
+  background-color: #135fb6;
+  box-shadow: 0 0 12px 4px #4a90e2;
+  color: white;
 }
 
 /* Leaderboard styles */
@@ -119,7 +128,7 @@
   cursor: pointer;
 }
 
-.leaderboard > div:last-of-type {
+.leaderboard > div:not(.leaderboard__column-titles):last-of-type {
   border-bottom: none;
 }
 
@@ -127,3 +136,39 @@
   margin: 0;
 }
 
+/* Media queries */
+@media (max-width: 600px) {
+  .leaderboard__content {
+    margin-top: 90px;
+  }
+
+  .leaderboard__content h1 {
+    text-align: center;
+  }
+
+  .leaderboard__buttons-container {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+  }
+
+  .leaderboard__content {
+    max-width: 75%;
+  }
+
+  .leaderboard__scene-card {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 395px) {
+  .leaderboard__buttons-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .leaderboard__scene-card {
+    margin-top: 20px;
+  }
+}

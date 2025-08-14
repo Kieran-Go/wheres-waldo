@@ -25,3 +25,10 @@ a:hover {
   color: darkblue;
   text-decoration: underline;
 }
+
+/* Media queries */
+@media (max-width: 500px) {
+  .error-page {
+    padding: 1rem;
+  }
+}
